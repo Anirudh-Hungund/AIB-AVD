@@ -1,40 +1,39 @@
- 	{
+{
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {},
     "variables": {},
     "resources": [
-      {
-        "name": "aibavdtemplate",
-        "type": "Microsoft.VirtualMachineImages/imageTemplates",
-        "apiVersion": "2020-02-14",
-        "location": "eastus",
-        "dependsOn": [],
-        "tags": {
-            "imagebuilderTemplate": "AzureImageBuilderSIG",
-            "userIdentity": "enabled"
-                },
+        {
+            "name": "aibavdtemplate",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates",
+            "apiVersion": "2020-02-14",
+            "location": "eastus",
+            "dependsOn": [],
+            "tags": {
+                "imagebuilderTemplate": "AzureImageBuilderSIG",
+                "userIdentity": "enabled"
+            },
             "identity": {
                 "type": "UserAssigned",
-                        "userAssignedIdentities": {
-                        "<imgBuilderId>": {}
-                    }
-                },
-        "properties": {
-            "buildTimeoutInMinutes" : 120,
-            "vmProfile": 
-                    {
+                "userAssignedIdentities": {
+                    "<imgBuilderId>": {}
+                }
+            },
+            "properties": {
+                "buildTimeoutInMinutes": 120,
+                "vmProfile": {
                     "vmSize": "Standard_B2s",
                     "osDiskSizeGB": 127
-                    },
-        
-            "source": {
-                "type": "ManagedImage",
-                "imageid": "/subscriptions/88b37238-d1eb-422c-9fa3-9eac7d5e6b17/resourceGroups/Test-CustomImage-RG/providers/Microsoft.Compute/images/tstAVDW10baseVM-image-20211110102447"
-            },
-            "customize": [
+                },
 
-        
+                "source": {
+                    "type": "ManagedImage",
+                    "imageid": "/subscriptions/88b37238-d1eb-422c-9fa3-9eac7d5e6b17/resourceGroups/Test-CustomImage-RG/providers/Microsoft.Compute/images/tstAVDW10baseVM-image-20211110102447"
+                },
+                "customize": [
+
+
                     {
                         "type": "PowerShell",
                         "name": "installFsLogix",
@@ -66,28 +65,27 @@
                         "restartCheckCommand": "write-host 'restarting post Teams Install'",
                         "restartTimeout": "5m"
                     },
-                        
+
                     {
                         "type": "WindowsUpdate",
                         "searchCriteria": "IsInstalled=0",
                         "filters": [
                             "exclude:$_.Title -like '*Preview*'",
                             "include:$true"
-                                    ],
+                        ],
                         "updateLimit": 40
                     }
 
-            ],
-            "distribute": 
-            [
-				{
-					"type":"managedImage",
-					"imageId": "/subscriptions/88b37238-d1eb-422c-9fa3-9eac7d5e6b17/resourceGroups/Test-CustomImage-RG/providers/Microsoft.Compute/images/tstAVDW10baseVM-image",
-					"location": "eastus",
-					"runOutputName": "<name>"
-				}
-            ]
+                ],
+                "distribute": [
+                    {
+                        "type": "managedImage",
+                        "imageId": "/subscriptions/88b37238-d1eb-422c-9fa3-9eac7d5e6b17/resourceGroups/Test-CustomImage-RG/providers/Microsoft.Compute/images/tstAVDW10baseVM-image",
+                        "location": "eastus",
+                        "runOutputName": "<name>"
+                    }
+                ]
             }
         }
     ]
-}    
+}
