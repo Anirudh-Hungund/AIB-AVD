@@ -16,7 +16,6 @@
     "variables": {
     },
 
-
     "resources": [
       {
         "name": "[parameters('imageTemplateName')]",
@@ -38,7 +37,6 @@
         
         "properties": {
             "buildTimeoutInMinutes" : 120,
-
             "vmProfile": 
                     {
                     "vmSize": "Standard_D2_v2",
@@ -46,11 +44,8 @@
                     },
         
             "source": {
-                "type": "PlatformImage",
-                    "publisher": "MicrosoftWindowsDesktop",
-                    "offer": "windows-10",
-                    "sku": "20h1-ent",
-                    "version": "latest"
+                "type": "ManagedImage",
+                "imageid": "/subscriptions/88b37238-d1eb-422c-9fa3-9eac7d5e6b17/resourceGroups/Test-CustomImage-RG/providers/Microsoft.Compute/images/tstAVDW10baseVM-image-20211110102447"
             },
             "customize": [
 
@@ -100,23 +95,14 @@
             ],
             "distribute": 
             [
-                {   
-                    "type": "SharedImage",
-                    "galleryImageId": "/subscriptions/<subscriptionID>/resourceGroups/<rgName>/providers/Microsoft.Compute/galleries/<sharedImageGalName>/images/<imageDefName>",
-                    "runOutputName": "<runOutputName>",
-                    "artifactTags": {
-                        "source": "wvd10",
-                        "baseosimg": "windows10"
-                    },
-                    "replicationRegions": [
-                      "<region1>"
-
-                    ]
-                }
+				{
+					"type":"managedImage",
+					"imageId": "/subscriptions/<subscriptionId>/resourceGroups/<destinationResourceGroupName>/providers/Microsoft.Compute/images/<imageDefName>",
+					"location": "<region>",
+					"runOutputName": "<name>",
+				}
             ]
             }
         }
-
-    
     ]
 }    
