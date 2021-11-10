@@ -99,7 +99,7 @@
 					"type":"managedImage",
 					"imageId": "/subscriptions/<subscriptionId>/resourceGroups/<destinationResourceGroupName>/providers/Microsoft.Compute/images/<imageDefName>",
 					"location": "<region>",
-					"runOutputName": "<name>",
+					"runOutputName": "<name>"
 				}
             ]
             }
