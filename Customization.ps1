@@ -30,6 +30,8 @@ NOTES
     5 - To get more verbose logging of the script remove the | Out-Null at the end of the PowerShell command
 #>
 
+Start-Transcript -Path C:\output.txt -Append
+
 Write-Host '*** WVD AIB CUSTOMIZER PHASE **************************************************************************************************'
 Write-Host '*** WVD AIB CUSTOMIZER PHASE ***                                                                                            ***'
 Write-Host '*** WVD AIB CUSTOMIZER PHASE *** Script: Win10ms_O365.ps1                                                                   ***'
