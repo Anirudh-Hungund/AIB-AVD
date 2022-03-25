@@ -197,3 +197,7 @@ Write-Host '*** WVD AIB CUSTOMIZER PHASE *** CONFIG TEAMS *** Configure Teams to
 Write-Host '*** WVD AIB CUSTOMIZER PHASE ********************* END *************************' 
 
 Stop-Transcript
+
+$sysPrepPath = 'C:\Windows\System32\Sysprep\Sysprep.exe'
+$arguments = '/generalize /oobe /shutdown /quiet'
+Invoke-Command -ScriptBlock {param($sysPrepPath,$arguments) Start-Process -FilePath $sysPrepPath -ArgumentList $arguments} -ArgumentList $sysPrepPath,$arguments
